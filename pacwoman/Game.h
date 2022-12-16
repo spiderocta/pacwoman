@@ -2,21 +2,25 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <array>
+#include "GameState.h"
+
 class Game
 {
+
 public:
 	Game();
 
+	~Game();
 	//run method contains the  whole game loop logic 
 	void run();
 
-	//actual game semulation methods 
-	void insertCoin();
-	void pressButton();
-	void moveStick(sf::Vector2i directon);
+	void changeGameState(GameState::State gameState);
 
 private:
 	sf::RenderWindow window;
+	GameState* currentState;
+	std::array<GameState*, GameState::Count> gameStates;
 };
 
 #endif GAME_H

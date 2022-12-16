@@ -4,7 +4,24 @@
 Game::Game() 
 	:window(sf::VideoMode(640, 480), "pacwoman")
 {
+    gameStates[GameState::NoCoin] = new NoCoinState(this);
+    gameStates[GameState::GetReady] = new GetReadyState(this);
+    gameStates[GameState::Playing] = new PlayingState(this);
+    gameStates[GameState::Won] = new WonState(this);
+    gameStates[GameState::Lost] = new LostState(this);
+
+    //the initial game state
+    changeGameState(GameState::NoCoin);
 }
+
+Game::~Game()
+{
+    for (GameState* gameState : gameStates) {
+        delete gameState;
+    }
+}
+
+
 
 void Game::run() {
 
@@ -19,44 +36,35 @@ void Game::run() {
             if (event.type == sf::Event::KeyPressed) {
 
                 if (event.key.code == sf::Keyboard::I) {
-                    insertCoin();
+                    currentState->insertCoin();
                 }
                 if (event.key.code == sf::Keyboard::S) {
-                    pressButton();
+                    currentState->pressButton();
                 }
                 if (event.key.code == sf::Keyboard::Left) {
-                    moveStick(sf::Vector2i(-1, 0));
+                    currentState->moveStick(sf::Vector2i(-1, 0));
                 }
                 if (event.key.code == sf::Keyboard::Right) {
-                    moveStick(sf::Vector2i(1, 0));
+                    currentState->moveStick(sf::Vector2i(1, 0));
                 }
                 if (event.key.code == sf::Keyboard::Down) {
-                    moveStick(sf::Vector2i(0, 1));
+                    currentState->moveStick(sf::Vector2i(0, 1));
                 }
                 if (event.key.code == sf::Keyboard::Up) {
-                    moveStick(sf::Vector2i(0 , -1));
+                    currentState->moveStick(sf::Vector2i(0 , -1));
                 }
             }
 
         }
 
+        currentState->update(sf::seconds(1));
         window.clear();
-        //draw
+        currentState->draw(window);
         window.display();
     }
 }
 
-void Game::insertCoin()
+void Game::changeGameState(GameState::State gameState)
 {
-    std::cout << "insert Coin" << std::endl;
-}
-
-void Game::pressButton()
-{
-    std::cout << "press Button" << std::endl;
-}
-
-void Game::moveStick(sf::Vector2i directon)
-{
-    std::cout << "move Stick" << std::endl;
+    currentState = gameStates[gameState];
 }
