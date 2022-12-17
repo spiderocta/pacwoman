@@ -15,12 +15,20 @@ public:
 	//run method contains the  whole game loop logic 
 	void run();
 
+	sf::Font& getFont();
+	sf::Texture& getLogo();
+	sf::Texture& getTexture();
+
 	void changeGameState(GameState::State gameState);
 
 private:
 	sf::RenderWindow window;
 	GameState* currentState;
 	std::array<GameState*, GameState::Count> gameStates;
+
+	sf::Font font;
+	sf::Texture logo;
+	sf::Texture texture;
 };
 
 #endif GAME_H

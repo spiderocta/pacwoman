@@ -4,6 +4,19 @@
 Game::Game() 
 	:window(sf::VideoMode(640, 480), "pacwoman")
 {
+    if (!font.loadFromFile("assets/font.ttf")) {
+        throw std::runtime_error("unable to load font from 'assets/font.ttf'");
+    }
+
+    if (!logo.loadFromFile("assets/logo.png")) {
+        throw std::runtime_error("unable to load logo 'assets/logo.png'");
+    }
+
+    if (!texture.loadFromFile("assets/texture.png")) {
+        throw std::runtime_error("unable to load texture from 'assets/texture.png'");
+    }
+
+
     gameStates[GameState::NoCoin] = new NoCoinState(this);
     gameStates[GameState::GetReady] = new GetReadyState(this);
     gameStates[GameState::Playing] = new PlayingState(this);
@@ -62,6 +75,21 @@ void Game::run() {
         currentState->draw(window);
         window.display();
     }
+}
+
+sf::Font& Game::getFont()
+{
+    // TODO: insert return statement here
+}
+
+sf::Texture& Game::getLogo()
+{
+    // TODO: insert return statement here
+}
+
+sf::Texture& Game::getTexture()
+{
+    // TODO: insert return statement here
 }
 
 void Game::changeGameState(GameState::State gameState)
