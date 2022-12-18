@@ -38,6 +38,8 @@ Game::~Game()
 
 void Game::run() {
 
+    sf::Clock frameClock;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -70,7 +72,7 @@ void Game::run() {
 
         }
 
-        currentState->update(sf::seconds(1));
+        currentState->update(frameClock.restart());
         window.clear();
         currentState->draw(window);
         window.display();
@@ -79,17 +81,17 @@ void Game::run() {
 
 sf::Font& Game::getFont()
 {
-    // TODO: insert return statement here
+    return font;
 }
 
 sf::Texture& Game::getLogo()
 {
-    // TODO: insert return statement here
+    return logo;
 }
 
 sf::Texture& Game::getTexture()
 {
-    // TODO: insert return statement here
+    return texture;
 }
 
 void Game::changeGameState(GameState::State gameState)

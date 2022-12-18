@@ -40,6 +40,11 @@ public:
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
 
+
+private :
+	sf::Text text;
+	sf::Sprite sprite;
+	bool displayText;
 };
 
 
@@ -53,9 +58,11 @@ public:
 	void insertCoin();
 	void pressButton();
 	void moveStick(sf::Vector2i direction);
-	void update(sf::Time Delta);
+	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
 
+private:
+	sf::Text text;
 };
 
 
@@ -68,7 +75,7 @@ public:
 	void insertCoin();
 	void pressButton();
 	void moveStick(sf::Vector2i direction);
-	void update(sf::Time Delta);
+	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
 
 };
@@ -83,10 +90,11 @@ public:
 	void insertCoin();
 	void pressButton();
 	void moveStick(sf::Vector2i direction);
-	void update(sf::Time Delta);
+	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
 
-
+private:
+	sf::Text text;
 };
 
 
@@ -99,9 +107,13 @@ public:
 	void insertCoin();
 	void pressButton();
 	void moveStick(sf::Vector2i direction);
-	void update(sf::Time Delta);
+	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
 
+private :
+	sf::Text text;
+	sf::Time countDown;
+	sf::Text countDownText;
 };
 
 #endif GAMESTATE_H
