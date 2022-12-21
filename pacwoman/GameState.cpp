@@ -121,42 +121,71 @@ void GetReadyState::draw(sf::RenderWindow& window)
 //playing state
 PlayingState::PlayingState(Game* game)
 	:GameState(game)
-	, pacwoamn(game->getTexture())
-	, ghost(game->getTexture())
+	//, pacwoamn(game->getTexture())
+	//, ghost(game->getTexture())
 	,maze(game->getTexture())
+	,pacwoman(nullptr)
 {
-	pacwoamn.move(100, 100);
-	ghost.move(200, 200);
+	//pacwoamn.move(100, 100);
+	//ghost.move(200, 200);
 	maze.loadLevel("level");
+	pacwoman = new PacWoman(game->getTexture());
+	pacwoman->setMaze(&maze);
+	pacwoman->setPosition(maze.mapCellToPixel(maze.getPacWomanPosition()));
+
+	//iterating over ghosts 
+	for (sf::Vector2i ghostPosition : maze.getGhostPositions())
+	{
+		Ghost* ghost = new Ghost(game->getTexture());
+		ghost->setMaze(&maze);
+		ghost->setPosition(maze.mapCellToPixel(ghostPosition));
+
+		ghosts.push_back(ghost);
+	}
 }
 
 void PlayingState::insertCoin()
 {
-	pacwoamn.die();
+	//pacwoman->die();
 }
 
 void PlayingState::pressButton()
 {
-	ghost.setWeak(sf::seconds(3));
+	//ghost.setWeak(sf::seconds(3));
 }
 
 void PlayingState::moveStick(sf::Vector2i direction)
 {
+	pacwoman->setDirection(direction);
 }
 
 void PlayingState::update(sf::Time delta)
 {
-	pacwoamn.update(delta);
-	ghost.update(delta);
+	pacwoman->update(delta);
+
+	for (Ghost* ghost : ghosts) {
+
+		ghost->update(delta);
+	}
+	
 }
 
 void PlayingState::draw(sf::RenderWindow& window)
 {
-	window.draw(pacwoamn);
-	window.draw(ghost);
 	window.draw(maze);
+	window.draw(*pacwoman);
+
+	for (Ghost* ghost : ghosts)
+		window.draw(*ghost);
 }
 
+PlayingState::~PlayingState()
+{
+	delete pacwoman;
+
+	for (Ghost* ghost : ghosts)
+		delete ghost;
+}
 
 //won state 
 WonState::WonState(Game* game)

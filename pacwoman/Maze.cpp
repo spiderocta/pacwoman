@@ -168,7 +168,7 @@ void Maze::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(sf::Sprite(renderTexture.getTexture()), states);
 
-	static sf::CircleShape dot =  Dot::getDot();  
+	static sf::CircleShape dot =  Dot::getDot();
 	static sf::CircleShape superDot = Dot::getSuperDot();
 
 	for (unsigned int i = 0; i < mazeData.size(); i++)

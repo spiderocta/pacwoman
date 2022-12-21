@@ -2,6 +2,7 @@
 #define GAMESTATE_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "PacWoman.h"
 #include "Ghost.h"
 #include "Maze.h"
@@ -74,6 +75,7 @@ class PlayingState : public GameState
 public:
 
 	PlayingState(Game* game);
+	~PlayingState();
 
 	void insertCoin();
 	void pressButton();
@@ -82,8 +84,9 @@ public:
 	void draw(sf::RenderWindow& window);
 
 private :
-	PacWoman pacwoamn;
-	Ghost ghost;
+	PacWoman* pacwoman;
+	std::vector<Ghost*> ghosts;
+	//Ghost ghost;
 	Maze maze;
 };
 
