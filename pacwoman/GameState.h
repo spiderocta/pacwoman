@@ -88,6 +88,7 @@ private :
 	std::vector<Ghost*> ghosts;
 	//Ghost ghost;
 	Maze maze;
+	sf::View camera;
 };
 
 

@@ -128,7 +128,7 @@ PlayingState::PlayingState(Game* game)
 {
 	//pacwoamn.move(100, 100);
 	//ghost.move(200, 200);
-	maze.loadLevel("level");
+	maze.loadLevel("large-level");
 	pacwoman = new PacWoman(game->getTexture());
 	pacwoman->setMaze(&maze);
 	pacwoman->setPosition(maze.mapCellToPixel(maze.getPacWomanPosition()));
@@ -142,6 +142,7 @@ PlayingState::PlayingState(Game* game)
 
 		ghosts.push_back(ghost);
 	}
+	camera.setSize(sf::Vector2f(480, 480));
 }
 
 void PlayingState::insertCoin()
@@ -161,6 +162,19 @@ void PlayingState::moveStick(sf::Vector2i direction)
 
 void PlayingState::update(sf::Time delta)
 {
+	camera.setCenter(pacwoman->getPosition());
+
+	if (camera.getCenter().x < 240)
+		camera.setCenter(240, camera.getCenter().y);
+	if (camera.getCenter().y < 240)
+		camera.setCenter(camera.getCenter().x, 240);
+
+	if (camera.getCenter().x > maze.getSize().x * 32 - 240)
+		camera.setCenter(maze.getSize().x * 32 - 240, camera.getCenter().y);
+
+	if (camera.getCenter().y > maze.getSize().y * 32 - 240)
+		camera.setCenter(camera.getCenter().x, maze.getSize().y * 32 - 240);
+
 	pacwoman->update(delta);
 
 	for (Ghost* ghost : ghosts) {
@@ -172,6 +186,7 @@ void PlayingState::update(sf::Time delta)
 
 void PlayingState::draw(sf::RenderWindow& window)
 {
+	window.setView(camera);
 	window.draw(maze);
 	window.draw(*pacwoman);
 
