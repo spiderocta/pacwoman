@@ -123,9 +123,11 @@ PlayingState::PlayingState(Game* game)
 	:GameState(game)
 	, pacwoamn(game->getTexture())
 	, ghost(game->getTexture())
+	,maze(game->getTexture())
 {
 	pacwoamn.move(100, 100);
 	ghost.move(200, 200);
+	maze.loadLevel("level");
 }
 
 void PlayingState::insertCoin()
@@ -152,6 +154,7 @@ void PlayingState::draw(sf::RenderWindow& window)
 {
 	window.draw(pacwoamn);
 	window.draw(ghost);
+	window.draw(maze);
 }
 
 

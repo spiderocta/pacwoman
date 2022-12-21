@@ -4,8 +4,9 @@
 
 class Dot
 {
-	sf::CircleShape getDot();
-	sf::CircleShape getSuperDot();
+public:
+	static sf::CircleShape getDot();
+	static sf::CircleShape getSuperDot();
 
 };
 

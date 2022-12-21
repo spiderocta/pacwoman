@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "PacWoman.h"
 #include "Ghost.h"
+#include "Maze.h"
 
 class Game;
 
@@ -83,7 +84,7 @@ public:
 private :
 	PacWoman pacwoamn;
 	Ghost ghost;
-
+	Maze maze;
 };
 
 
