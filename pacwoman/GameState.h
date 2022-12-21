@@ -2,6 +2,8 @@
 #define GAMESTATE_H
 
 #include <SFML/Graphics.hpp>
+#include "PacWoman.h"
+#include "Ghost.h"
 
 class Game;
 
@@ -77,6 +79,10 @@ public:
 	void moveStick(sf::Vector2i direction);
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
+
+private :
+	PacWoman pacwoamn;
+	Ghost ghost;
 
 };
 

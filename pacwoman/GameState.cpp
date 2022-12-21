@@ -121,15 +121,21 @@ void GetReadyState::draw(sf::RenderWindow& window)
 //playing state
 PlayingState::PlayingState(Game* game)
 	:GameState(game)
+	, pacwoamn(game->getTexture())
+	, ghost(game->getTexture())
 {
+	pacwoamn.move(100, 100);
+	ghost.move(200, 200);
 }
 
 void PlayingState::insertCoin()
 {
+	pacwoamn.die();
 }
 
 void PlayingState::pressButton()
 {
+	ghost.setWeak(sf::seconds(3));
 }
 
 void PlayingState::moveStick(sf::Vector2i direction)
@@ -138,10 +144,14 @@ void PlayingState::moveStick(sf::Vector2i direction)
 
 void PlayingState::update(sf::Time delta)
 {
+	pacwoamn.update(delta);
+	ghost.update(delta);
 }
 
 void PlayingState::draw(sf::RenderWindow& window)
 {
+	window.draw(pacwoamn);
+	window.draw(ghost);
 }
 
 

@@ -2,16 +2,10 @@
 #define PACWOMAN_H
 
 #include "Character.h"
+#include "Animator.h"
 
 class PacWoman : public Character
 {
-private:
-	sf::Sprite visual;
-	bool isDying;
-	bool isDead;
-
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
 public:
 	PacWoman(sf::Texture& texture);
 	void die();
@@ -19,7 +13,17 @@ public:
 	bool isDying() const;
 	bool isDead() const;
 
+	void update(sf::Time delta);
 
+private:
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	bool m_isDying;
+	bool m_isDead;
+	sf::Sprite m_visual;
+
+	Animator m_runAnimator;
+	Animator m_dieAnimator;
 };
 
 #endif

@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Dot.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="PacWoman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Bonus.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Dot.h" />
