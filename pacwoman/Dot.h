@@ -1,5 +1,7 @@
-#pragma once
+#ifndef DOT_H
+#define DOT_H
 #include <SFML/Graphics.hpp>
+
 class Dot
 {
 	sf::CircleShape getDot();
@@ -7,3 +9,4 @@ class Dot
 
 };
 
+#endif DOT_H
