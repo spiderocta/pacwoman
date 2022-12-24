@@ -62,11 +62,12 @@ public:
 	void insertCoin();
 	void pressButton();
 	void moveStick(sf::Vector2i direction);
-	void update(sf::Time delta);
+	void update(sf::Time Delta);
 	void draw(sf::RenderWindow& window);
 
 private:
 	sf::Text text;
+
 };
 
 
@@ -91,6 +92,16 @@ private :
 	//Ghost ghost;
 	Maze maze;
 	sf::View camera;
+	sf::RenderTexture scene;
+
+	sf::Text scoreText;
+	sf::Text levelText;
+	sf::Text remainingDotsText;
+	sf::Sprite liveSprite[3];
+
+	int level;
+	int liveCount;
+	int score;
 };
 
 

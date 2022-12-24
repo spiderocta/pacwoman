@@ -28,14 +28,14 @@ NoCoinState::NoCoinState(Game* game)
 {
 	//initializations
 	sprite.setTexture(game->getLogo());
-	sprite.setPosition(40, 50);
+	sprite.setPosition(20, 50);
 
 	text.setFont(game->getFont());
-	text.setString("Please Insert A Coin");
+	text.setString("Insert A Coin");
 	
 	//center text 
 	centerOrigin(text);
-	text.setPosition(270, 150);
+	text.setPosition(240, 180);
 
 	displayText = true;
 }
@@ -77,10 +77,10 @@ void NoCoinState::draw(sf::RenderWindow& window)
 // get ready state
 GetReadyState::GetReadyState(Game* game)
 	:GameState(game)
-{ 
+{
 	text.setFont(game->getFont());
-	text.setString("Press start when you are ready"); 
-	text.setCharacterSize(15);
+	text.setString("Press Start when you're ready...");
+	text.setCharacterSize(14);
 
 	centerOrigin(text);
 	text.setPosition(240, 240);
@@ -125,6 +125,9 @@ PlayingState::PlayingState(Game* game)
 	//, ghost(game->getTexture())
 	,maze(game->getTexture())
 	,pacwoman(nullptr)
+	, level(0)
+	, liveCount(3)
+	, score(0)
 {
 	//pacwoamn.move(100, 100);
 	//ghost.move(200, 200);
@@ -143,6 +146,32 @@ PlayingState::PlayingState(Game* game)
 		ghosts.push_back(ghost);
 	}
 	camera.setSize(sf::Vector2f(480, 480));
+	scene.create(480, 480);
+
+	scoreText.setFont(game->getFont());
+	scoreText.setCharacterSize(10);
+	scoreText.setPosition(10, 480);
+	scoreText.setString("0 points");
+
+	levelText.setFont(game->getFont());
+	levelText.setCharacterSize(10);
+	levelText.setPosition(160, 480);
+	levelText.setString("level x");
+
+	remainingDotsText.setFont(game->getFont());
+	remainingDotsText.setCharacterSize(10);
+	remainingDotsText.setPosition(280, 480);
+	remainingDotsText.setString("0 dots");
+
+	for (auto& liveSprite : liveSprite)
+	{
+		liveSprite.setTexture(game->getTexture());
+		liveSprite.setTextureRect(sf::IntRect(122, 0, 20, 20));
+	}
+
+	liveSprite[0].setPosition(sf::Vector2f(415, 480));
+	liveSprite[1].setPosition(sf::Vector2f(435, 480));
+	liveSprite[2].setPosition(sf::Vector2f(455, 480));
 }
 
 void PlayingState::insertCoin()
@@ -234,12 +263,24 @@ void PlayingState::update(sf::Time delta)
 
 void PlayingState::draw(sf::RenderWindow& window)
 {
-	window.setView(camera);
-	window.draw(maze);
-	window.draw(*pacwoman);
+	scene.clear();
+	scene.setView(camera);
+	scene.draw(maze);
+	scene.draw(*pacwoman);
 
-	for (Ghost* ghost : ghosts)
-		window.draw(*ghost);
+	for (Ghost* ghost : ghosts) {
+		scene.draw(*ghost);
+	}
+	scene.display();
+
+	window.draw(sf::Sprite(scene.getTexture()));
+
+	window.draw(scoreText);
+	window.draw(levelText);
+	window.draw(remainingDotsText);
+
+	for (unsigned int i = 0; i < liveCount; i++)
+		window.draw(liveSprite[i]);
 }
 
 void PlayingState::moveCharactersToInitialPosition()

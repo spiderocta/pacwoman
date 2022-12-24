@@ -2,7 +2,7 @@
 #include <iostream>
 
 Game::Game() 
-	:window(sf::VideoMode(640, 480), "pacwoman")
+	:window(sf::VideoMode(480, 500), "pacwoman")
 {
     if (!font.loadFromFile("assets/font.ttf")) {
         throw std::runtime_error("unable to load font from 'assets/font.ttf'");
