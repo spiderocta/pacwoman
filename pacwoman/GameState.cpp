@@ -131,7 +131,7 @@ PlayingState::PlayingState(Game* game)
 {
 	//pacwoamn.move(100, 100);
 	//ghost.move(200, 200);
-	maze.loadLevel("large-level");
+	maze.loadLevel("medium");
 	pacwoman = new PacWoman(game->getTexture());
 	pacwoman->setMaze(&maze);
 	pacwoman->setPosition(maze.mapCellToPixel(maze.getPacWomanPosition()));
@@ -257,8 +257,26 @@ void PlayingState::update(sf::Time delta)
 	if (pacwoman->isDead())
 	{
 		pacwoman->reset();
-		moveCharactersToInitialPosition();
+
+		liveCount--;
+
+		if (liveCount < 0)
+			getGame()->changeGameState(GameState::Lost);
+		else
+			moveCharactersToInitialPosition();
 	}
+
+
+	if (maze.getRemainingDots() == 0)
+	{
+		getGame()->changeGameState(GameState::Won);
+	}
+
+	updateCameraPosition();
+
+	// Update score text and remaining dots
+	scoreText.setString(std::to_string(score) + " points");
+	remainingDotsText.setString(std::to_string(maze.getRemainingDots()) + "x dots");
 }
 
 void PlayingState::draw(sf::RenderWindow& window)
@@ -309,6 +327,74 @@ void PlayingState::updateCameraPosition()
 	if (camera.getCenter().y > maze.getSize().y * 32 - 240)
 		camera.setCenter(camera.getCenter().x, maze.getSize().y * 32 - 240);
 
+}
+
+void PlayingState::loadNextLevel()
+{
+	maze.loadLevel("large-level");
+
+	level++;
+
+	int mapLevel = level % 3;
+	int speedLevel = std::floor(level / 3);
+
+	if (mapLevel == 0)
+		maze.loadLevel("small");
+	else if (mapLevel == 1)
+		maze.loadLevel("medium");
+	else if (mapLevel == 2)
+		maze.loadLevel("large");
+
+	// Destroy previous characters
+	for (Ghost* ghost : ghosts)
+		delete ghost;
+
+	ghosts.clear();
+
+	// Create new characters
+	for (auto ghostPosition : maze.getGhostPositions())
+	{
+		Ghost* ghost = new Ghost(getGame()->getTexture(), pacwoman);
+		ghost->setMaze(&maze);
+		//ghost->setPosition(m_maze.mapCellToPixel(ghostPosition));
+
+		ghosts.push_back(ghost);
+	}
+
+	// Change speed according to the new level
+	float speed = 100 + (speedLevel * 50);
+
+	pacwoman->setSpeed(speed + 25);
+
+	for (auto& ghost : ghosts)
+		ghost->setSpeed(speed);
+
+	moveCharactersToInitialPosition();
+
+	//Update level text
+	levelText.setString("level " + std::to_string(speedLevel) + " - " + std::to_string(mapLevel + 1));
+
+}
+
+void PlayingState::resetToZero()
+{
+	resetLiveCount();
+
+	level = 0;
+	resetCurrentLevel();
+
+	score = 0;
+}
+
+void PlayingState::resetCurrentLevel()
+{
+	level--;
+	loadNextLevel();
+}
+
+void PlayingState::resetLiveCount()
+{
+	liveCount = 3;
 }
 
 PlayingState::~PlayingState()

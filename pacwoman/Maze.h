@@ -28,6 +28,7 @@ public:
 	bool isBonus(sf::Vector2i position) const;
 
 	sf::Vector2i getSize() const;
+	int getRemainingDots() const;
 
 private:
 

@@ -86,6 +86,11 @@ public:
 	void moveCharactersToInitialPosition();
 	void updateCameraPosition();
 
+	void loadNextLevel();
+	void resetToZero();
+	void resetCurrentLevel();
+	void resetLiveCount();
+
 private :
 	PacWoman* pacwoman;
 	std::vector<Ghost*> ghosts;

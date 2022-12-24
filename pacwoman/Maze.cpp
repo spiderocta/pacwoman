@@ -11,6 +11,12 @@ Maze::Maze(sf::Texture& texture)
 
 void Maze::loadLevel(std::string name)
 {
+	mazeSize = sf::Vector2i(0, 0);
+	mazeData.clear();
+
+	pacWomanPosition = sf::Vector2i(0, 0);
+	ghostPositions.clear();
+
 	sf::Image levelData;
 	if (!levelData.loadFromFile("assets/levels/" + name + ".png"))
 		throw std::runtime_error("Failed to load level (" + name + ")");
@@ -193,6 +199,19 @@ void Maze::draw(sf::RenderTarget& target, sf::RenderStates states) const
 sf::Vector2i Maze::getSize() const
 {
 	return mazeSize;
+}
+
+int Maze::getRemainingDots() const
+{
+	int remainingDots = 0;
+
+	for (unsigned int i = 0; i < mazeData.size(); i++)
+	{
+		if (mazeData[i] == Dot || mazeData[i] == SuperDot)
+			remainingDots++;
+	}
+
+	return remainingDots;
 }
 
 
