@@ -114,7 +114,7 @@ class WonState : public GameState
 {
 public:
 
-	WonState(Game* game);
+	WonState(Game* game, GameState* playingState);
 
 	void insertCoin();
 	void pressButton();
@@ -124,6 +124,7 @@ public:
 
 private:
 	sf::Text text;
+	PlayingState* m_playingState;
 };
 
 
@@ -131,7 +132,7 @@ class LostState : public GameState
 {
 public:
 
-	LostState(Game* game);
+	LostState(Game* game, GameState* playingState);
 
 	void insertCoin();
 	void pressButton();
@@ -143,6 +144,7 @@ private :
 	sf::Text text;
 	sf::Time countDown;
 	sf::Text countDownText;
+	PlayingState* m_playingState;
 };
 
 #endif GAMESTATE_H
