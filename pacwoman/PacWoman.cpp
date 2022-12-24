@@ -7,16 +7,16 @@ PacWoman::PacWoman(sf::Texture& texture)
 {
     setOrigin(20, 20);
 
-    //m_runAnimator.addFrame(sf::IntRect(0, 32, 40, 40));
+    m_runAnimator.addFrame(sf::IntRect(0, 32, 40, 40));
     m_runAnimator.addFrame(sf::IntRect(0, 72, 40, 40));
 
-    //m_dieAnimator.addFrame(sf::IntRect(0, 32, 40, 40));
-    //m_dieAnimator.addFrame(sf::IntRect(0, 72, 40, 40));
-    /*m_dieAnimator.addFrame(sf::IntRect(0, 112, 40, 40));
+    m_dieAnimator.addFrame(sf::IntRect(0, 32, 40, 40));
+    m_dieAnimator.addFrame(sf::IntRect(0, 72, 40, 40));
+    m_dieAnimator.addFrame(sf::IntRect(0, 112, 40, 40));
     m_dieAnimator.addFrame(sf::IntRect(40, 112, 40, 40));
     m_dieAnimator.addFrame(sf::IntRect(80, 112, 40, 40));
     m_dieAnimator.addFrame(sf::IntRect(120, 112, 40, 40));
-    m_dieAnimator.addFrame(sf::IntRect(160, 112, 40, 40));*/
+    m_dieAnimator.addFrame(sf::IntRect(160, 112, 40, 40));
 
     m_runAnimator.play(sf::seconds(0.25), true);
 }
@@ -58,7 +58,7 @@ void PacWoman::update(sf::Time delta)
     }
     else
     {
-        //m_dieAnimator.update(delta);
+        m_dieAnimator.update(delta);
         m_dieAnimator.animate(m_visual);
 
         if (!m_dieAnimator.isPlaying())
@@ -68,4 +68,13 @@ void PacWoman::update(sf::Time delta)
         }
     }
     Character::update(delta);
+}
+
+void PacWoman::reset()
+{
+    m_isDying = false;
+    m_isDead = false;
+
+    m_runAnimator.play(sf::seconds(0.25), true);
+    m_runAnimator.animate(m_visual);
 }

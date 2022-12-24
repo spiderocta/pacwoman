@@ -1,5 +1,7 @@
 #include "Maze.h"
 #include "Dot.h"
+#include <iostream>
+#include <cassert>
 
 Maze::Maze(sf::Texture& texture)
 	: mazeSize(0, 0)
@@ -243,4 +245,25 @@ bool Maze::isWall(sf::Vector2i position) const
 		return false;
 
 	return mazeData[positionToIndex(position)] == Wall;
+}
+
+bool Maze::isDot(sf::Vector2i position) const
+{
+	return mazeData[positionToIndex(position)] == Dot;
+}
+
+bool Maze::isSuperDot(sf::Vector2i position) const
+{
+	return mazeData[positionToIndex(position)] == SuperDot;
+}
+
+void Maze::pickObject(sf::Vector2i position)
+{
+	assert(!isWall(position));
+	mazeData[positionToIndex(position)] = Empty;
+}
+
+bool Maze::isBonus(sf::Vector2i position) const
+{
+	return mazeData[positionToIndex(position)] == Bonus;
 }

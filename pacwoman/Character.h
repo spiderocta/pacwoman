@@ -19,6 +19,7 @@ public:
 	float getSpeed() const;
 
 	bool willMove() const;
+	sf::FloatRect getCollisionBox() const;
 
 private:
 	float m_speed;

@@ -22,6 +22,11 @@ public:
 
 	bool isWall(sf::Vector2i position) const;
 
+	bool isDot(sf::Vector2i position) const;
+	bool isSuperDot(sf::Vector2i position) const;
+	void pickObject(sf::Vector2i position);
+	bool isBonus(sf::Vector2i position) const;
+
 	sf::Vector2i getSize() const;
 
 private:

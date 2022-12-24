@@ -180,8 +180,56 @@ void PlayingState::update(sf::Time delta)
 	for (Ghost* ghost : ghosts) {
 
 		ghost->update(delta);
-	}
+	} 
+
+	sf::Vector2f pixelPosition = pacwoman->getPosition();
+	sf::Vector2f offset(std::fmod(pixelPosition.x, 32), std::fmod(pixelPosition.y, 32));
+	offset -= sf::Vector2f(16, 16);
 	
+	if (offset.x <= 2 && offset.x >= -2 && offset.y <= 2 && offset.y >= -2)
+	{
+		sf::Vector2i cellPosition = maze.mapPixelToCell(pixelPosition);
+
+		if (maze.isDot(cellPosition))
+		{
+			
+		}
+		else if (maze.isSuperDot(cellPosition))
+		{
+			for (Ghost* ghost : ghosts)
+				ghost->setWeak(sf::seconds(5));
+
+			
+		}
+		else if (maze.isBonus(cellPosition))
+		{
+			
+		}
+
+		maze.pickObject(cellPosition);
+	}
+
+
+	for (Ghost* ghost : ghosts)
+	{
+		if (ghost->getCollisionBox().intersects(pacwoman->getCollisionBox()))
+		{
+			if (ghost->isWeak())
+			{
+				ghosts.erase(std::find(ghosts.begin(), ghosts.end(), ghost));
+
+				
+			}
+			else
+				pacwoman->die();
+		}
+	}
+
+	if (pacwoman->isDead())
+	{
+		pacwoman->reset();
+		moveCharactersToInitialPosition();
+	}
 }
 
 void PlayingState::draw(sf::RenderWindow& window)
@@ -192,6 +240,34 @@ void PlayingState::draw(sf::RenderWindow& window)
 
 	for (Ghost* ghost : ghosts)
 		window.draw(*ghost);
+}
+
+void PlayingState::moveCharactersToInitialPosition()
+{
+	pacwoman->setPosition(maze.mapCellToPixel(maze.getPacWomanPosition()));
+
+	auto ghostPositions = maze.getGhostPositions();
+	for (unsigned int i = 0; i < ghosts.size(); i++)
+		ghosts[i]->setPosition(maze.mapCellToPixel(ghostPositions[i]));
+
+	updateCameraPosition();
+}
+
+void PlayingState::updateCameraPosition()
+{
+	camera.setCenter(pacwoman->getPosition());
+
+	if (camera.getCenter().x < 240)
+		camera.setCenter(240, camera.getCenter().y);
+	if (camera.getCenter().y < 240)
+		camera.setCenter(camera.getCenter().x, 240);
+
+	if (camera.getCenter().x > maze.getSize().x * 32 - 240)
+		camera.setCenter(maze.getSize().x * 32 - 240, camera.getCenter().y);
+
+	if (camera.getCenter().y > maze.getSize().y * 32 - 240)
+		camera.setCenter(camera.getCenter().x, maze.getSize().y * 32 - 240);
+
 }
 
 PlayingState::~PlayingState()

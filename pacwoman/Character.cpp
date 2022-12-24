@@ -2,7 +2,7 @@
 
 Character::Character()
 	:m_maze(nullptr)
-	, m_speed(60.f)
+	, m_speed(100.f)
 	, m_currentDirection(1, 0)
 	, m_nextDirection(0, 0)
 	, m_previousIntersection(0, 0)
@@ -27,6 +27,12 @@ float Character::getSpeed() const
 bool Character::willMove() const
 {
 	return !m_maze->isWall(m_previousIntersection + m_nextDirection);
+}
+
+sf::FloatRect Character::getCollisionBox() const
+{
+	sf::FloatRect bounds(3, 3, 34, 34);
+	return getTransform().transformRect(bounds);
 }
 
 void Character::setDirection(sf::Vector2i direction)
