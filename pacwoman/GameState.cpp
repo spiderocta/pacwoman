@@ -136,7 +136,7 @@ PlayingState::PlayingState(Game* game)
 	//iterating over ghosts 
 	for (sf::Vector2i ghostPosition : maze.getGhostPositions())
 	{
-		Ghost* ghost = new Ghost(game->getTexture());
+		Ghost* ghost = new Ghost(game->getTexture(), pacwoman);
 		ghost->setMaze(&maze);
 		ghost->setPosition(maze.mapCellToPixel(ghostPosition));
 

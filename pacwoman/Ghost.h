@@ -16,12 +16,15 @@ public:
 	};
 
 public:
-	Ghost(sf::Texture& texture);
+	Ghost(sf::Texture& texture, PacWoman* pacWoman);
 
 	void setWeak(sf::Time duration);
 	bool isWeak() const;
 
 	void update(sf::Time delta);
+
+protected:
+	void changeDirection();
 
 
 private:

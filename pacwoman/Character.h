@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Maze.h"
+#include <array>
 
 class Character : public sf::Drawable, public sf::Transformable
 {
@@ -17,12 +18,20 @@ public:
 	void setSpeed(float speed);
 	float getSpeed() const;
 
+	bool willMove() const;
+
 private:
 	float m_speed;
 	Maze* m_maze;
 
 	sf::Vector2i m_currentDirection;
 	sf::Vector2i m_nextDirection;
+
+	sf::Vector2i m_previousIntersection;
+	std::array<bool, 4> m_availableDirections;
+
+protected:
+	virtual void changeDirection() {};
 };
 
 #endif 
