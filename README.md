@@ -39,8 +39,8 @@
 ```
 
 ## screenshots
-<img src="https://user-images.githubusercontent.com/103882018/209479355-da7baf7c-3120-4f1a-907a-c086cb8c52a6.png" width="300"> <img src="https://user-images.githubusercontent.com/103882018/209479383-38523450-4974-4407-863c-b5d8a0200af6.png" width="300">
- <img src="https://user-images.githubusercontent.com/103882018/209479403-80bfbda0-92a9-4272-a17a-66b0e034feb7.png" width="300">
+<img src="https://user-images.githubusercontent.com/103882018/209479355-da7baf7c-3120-4f1a-907a-c086cb8c52a6.png" width="250"> <img src="https://user-images.githubusercontent.com/103882018/209479383-38523450-4974-4407-863c-b5d8a0200af6.png" width="250">
+ <img src="https://user-images.githubusercontent.com/103882018/209479403-80bfbda0-92a9-4272-a17a-66b0e034feb7.png" width="250">
 
 ## gameplay and level difficulty selection
 
