@@ -47,6 +47,30 @@
 https://user-images.githubusercontent.com/103882018/209479668-1e5c9411-ded1-4947-bac9-6196bd782ce9.mp4
 
 
+## Usage
+
+
+```bash
+> git clone git@github.com:spiderocta/pacwoman.git 
+
+> cd pacwoman/
+
+> click on `pacwoman.sln` to open in microsoft visual studio 
+
+> build and run
+```
+
+
+> [SFML2.5.1](https://www.sfml-dev.org/download/sfml/2.5.1/)  
+> [SFML and Visual Studio](https://www.sfml-dev.org/tutorials/2.5/start-vc.php)    
+> [SFML and Code::Blocks (MinGW)](https://www.sfml-dev.org/tutorials/2.5/start-cb.php) 
+
+
+
+## Contributions
+
+The [issue tracker](https://github.com/spiderocta/pacwoman/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
+
 # Status 
 ![94%](https://progress-bar.dev/85/?title=Done)
 
