@@ -19,7 +19,11 @@ public:
 	float getSpeed() const;
 
 	bool willMove() const;
+
 	sf::FloatRect getCollisionBox() const;
+
+protected:
+	virtual void changeDirection() {};
 
 private:
 	float m_speed;
@@ -30,9 +34,6 @@ private:
 
 	sf::Vector2i m_previousIntersection;
 	std::array<bool, 4> m_availableDirections;
-
-protected:
-	virtual void changeDirection() {};
 };
 
 #endif 

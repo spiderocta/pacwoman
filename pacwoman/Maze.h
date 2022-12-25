@@ -21,13 +21,14 @@ public:
 	sf::Vector2f mapCellToPixel(sf::Vector2i cell) const;
 
 	bool isWall(sf::Vector2i position) const;
-
 	bool isDot(sf::Vector2i position) const;
 	bool isSuperDot(sf::Vector2i position) const;
 	void pickObject(sf::Vector2i position);
+
 	bool isBonus(sf::Vector2i position) const;
 
 	sf::Vector2i getSize() const;
+
 	int getRemainingDots() const;
 
 private:
@@ -43,13 +44,13 @@ private:
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	sf::Vector2i mazeSize;
-	std::vector<CellData> mazeData;
-	sf::Vector2i pacWomanPosition;
-	std::vector<sf::Vector2i> ghostPositions;
+	sf::Vector2i m_mazeSize;
+	std::vector<CellData> m_mazeData;
+	sf::Vector2i m_pacWomanPosition;
+	std::vector<sf::Vector2i> m_ghostPositions;
 
-	sf::RenderTexture renderTexture;
-	sf::Texture& texture;
+	sf::RenderTexture m_renderTexture;
+	sf::Texture& m_texture;
 };
 
 #endif

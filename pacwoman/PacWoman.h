@@ -5,6 +5,7 @@
 #include "Animator.h"
 
 class PacWoman : public Character
+
 {
 public:
 	PacWoman(sf::Texture& texture);
@@ -14,6 +15,7 @@ public:
 	bool isDead() const;
 
 	void update(sf::Time delta);
+
 	void reset();
 
 private:

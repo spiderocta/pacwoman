@@ -89,7 +89,7 @@ void Ghost::changeDirection()
 	{
 		float directionAngle = std::atan2(direction.x, direction.y) * (180 / 3.14);
 
-		//Normalizing the angle difference
+		//Normalize the angle difference
 		float diff = 180 - std::abs(std::abs(directionAngle - targetAngle) - 180);
 
 		directionProb[diff] = direction;

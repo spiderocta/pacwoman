@@ -5,11 +5,8 @@
 
 class Bonus : public sf::Drawable, public sf::Transformable
 {
-private:
-	sf::Sprite visual;
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
 public:
+
 	enum Fruit
 	{
 		Banana,
@@ -17,8 +14,17 @@ public:
 		Cherry
 	};
 
+public:
+
 	Bonus(sf::Texture& texture);
 	void setFruit(Fruit fruit);
+
+private:
+
+	sf::Sprite m_visual;
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 };
 
 #endif BONUS_H

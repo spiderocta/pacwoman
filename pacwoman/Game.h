@@ -6,13 +6,12 @@
 #include "GameState.h"
 
 class Game
-{
 
+{
 public:
 	Game();
-
 	~Game();
-	//run method contains the  whole game loop logic 
+
 	void run();
 
 	sf::Font& getFont();
@@ -22,13 +21,13 @@ public:
 	void changeGameState(GameState::State gameState);
 
 private:
-	sf::RenderWindow window;
-	GameState* currentState;
-	std::array<GameState*, GameState::Count> gameStates;
+	sf::RenderWindow m_window;
+	GameState* m_currentState;
+	std::array<GameState*, GameState::Count> m_gameStates;
 
-	sf::Font font;
-	sf::Texture logo;
-	sf::Texture texture;
+	sf::Font m_font;
+	sf::Texture m_logo;
+	sf::Texture m_texture;
 };
 
 #endif GAME_H
