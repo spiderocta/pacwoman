@@ -75,3 +75,10 @@ The [issue tracker](https://github.com/spiderocta/pacwoman/issues) is the prefer
 ![94%](https://progress-bar.dev/85/?title=Done)
 
 
+> please note :  
+> - at this satge this code represents a playable game with some crashes during automatic level switching
+
+> - but each level can be played separately with a specific difficulty
+
+> - you can switch between levels using -> right arrow key before pressing "S" button the "You Won" message will appear once
+then you can scroll through levels
