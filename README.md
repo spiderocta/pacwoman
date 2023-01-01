@@ -82,3 +82,11 @@ The [issue tracker](https://github.com/spiderocta/pacwoman/issues) is the prefer
 
 > - you can switch between levels using -> right arrow key before pressing "S" button the "You Won" message will appear once
 then you can scroll through levels
+
+
+## download 
+
+[![image](https://user-images.githubusercontent.com/103882018/210176618-4748872b-7395-40ac-977e-7229adac4f33.png)](https://spiderocta.itch.io/pacwoman)
+[![image](https://user-images.githubusercontent.com/103882018/210176861-ec50869d-c2dc-4d62-bdb9-e79219c4c137.png)](https://github.com/spiderocta/pacwoman/releases)
+
+
